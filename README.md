@@ -1,14 +1,6 @@
 # pinia-discovery
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Pinia is a state management library for Vue.js that offers an alternative to Vuex, with strong typing, class-based architecture, native module support and seamless integration with Vue 3's Composition API. It's appreciated for its simplicity, performance and modern features.
 
 ## Project Setup
 
