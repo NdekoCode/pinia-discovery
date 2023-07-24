@@ -1,12 +1,9 @@
 <script setup>
-import { RouterView } from "vue-router";
+import Counter from "./pages/Counter.vue";
 </script>
 
 <template>
-  <RouterView />
-  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint porro vitae,
-  dolore dicta aperiam fuga voluptatum quia tempora culpa in quod nihil incidunt
-  molestiae delectus repellat quas blanditiis ipsa distinctio?
+  <Counter />
 </template>
 
 <style scoped>
