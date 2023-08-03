@@ -1,15 +1,12 @@
 <template>
   <p class="p-1 text-3xl font-bold text-center">
-    {{ counter }}
+    {{ store.count }}
   </p>
 </template>
 
-<script setup>
-const { counter } = defineProps({
-  counter: {
-    type: Number,
-  },
-});
+<script lang="ts" setup>
+import useCount from "@/stores/counterStore";
+const store = useCount();
 </script>
 
 <style lang="scss" scoped></style>

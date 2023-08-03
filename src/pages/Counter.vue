@@ -1,8 +1,8 @@
 <template>
   <div class="flex-col-center">
     <h1 class="my-3 text-xl font-bold font-gray-300">Counter</h1>
-    <PrintCounter :counter="store.count" />
-    <CounterButton @increment="updateCounter" />
+    <PrintCounter />
+    <CounterButton />
   </div>
 </template>
 
