@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import Counter from '@/views/Counter.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <Counter />
+  <RouterView />
 </template>
 
 <style scoped>

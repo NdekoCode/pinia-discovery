@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import CounterButton from '@/components/CounterButton.vue'
 import PrintCounter from '@/components/PrintCounter.vue'
 </script>
