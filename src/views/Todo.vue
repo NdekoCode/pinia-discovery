@@ -5,8 +5,8 @@ import TaskStats from '@/components/TaskStats.vue'
 import useTaskStore from '@/stores/tasks'
 import { onMounted } from 'vue'
 const taskStore = useTaskStore()
-onMounted(() => {
-  taskStore.fetchTasks()
+onMounted(async () => {
+  await taskStore.fetchTasks()
   taskStore.currentPageItem()
 })
 </script>

@@ -1,18 +1,39 @@
 <script lang="ts" setup>
+import type { Tasks } from '@/libs/utilities/types'
 import useTaskStore from '@/stores/tasks'
-import { reactive } from 'vue'
+import type { SubscriptionCallbackMutation } from 'pinia'
+import { reactive, ref, type DebuggerEvent, type Ref } from 'vue'
+import { type Task } from '../libs/utilities/types'
 const taskStore = useTaskStore()
 const task = reactive({
   title: '',
   description: ''
 })
+const selectedTask: Ref<Task | null> = ref(null)
 const addTask = (event: Event) => {
-  if (task.title.trim().length > 1 && task.description.trim().length > 5) {
-    taskStore.addTask(task)
+  if (selectedTask.value) {
+    const dataEdit = { ...selectedTask.value, title: task.title, description: task.description }
+    taskStore.editSelectedTask(dataEdit)
+    selectedTask.value = null
     task.title = ''
     task.description = ''
+  } else {
+    if (task.title.trim().length > 1 && task.description.trim().length > 5) {
+      taskStore.addTask(task)
+      task.title = ''
+      task.description = ''
+    }
   }
 }
+taskStore.$subscribe((mutation: SubscriptionCallbackMutation<Tasks>) => {
+  const events: DebuggerEvent = mutation.events as DebuggerEvent
+  const target = events.target as Tasks
+  selectedTask.value = target.selectedTask as Task
+  if (selectedTask.value) {
+    task.title = selectedTask.value.title
+    task.description = selectedTask.value.description
+  }
+})
 </script>
 <template>
   <form class="flex flex-col justify-center px-16" @submit.prevent="addTask">

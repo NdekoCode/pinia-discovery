@@ -1,3 +1,9 @@
+import type {
+  SubscriptionCallbackMutationDirect,
+  SubscriptionCallbackMutationPatchFunction,
+  SubscriptionCallbackMutationPatchObject
+} from 'pinia'
+
 export type Product = {
   id: number | string
   title: string
@@ -15,7 +21,8 @@ export type Product = {
 }
 export type Tasks = {
   tasks: Task[]
-  currenttasksItem: Task[]
+  currentTasksItem: Task[]
+  selectedTask: Task | null
   pageSize: number
   currentPage: number
 }
@@ -33,3 +40,7 @@ export type TodoTask = {
   userId?: string | number
   completed?: boolean
 }
+export declare type SubscriptionCallbackMutation<S> =
+  | SubscriptionCallbackMutationDirect
+  | SubscriptionCallbackMutationPatchObject<S>
+  | SubscriptionCallbackMutationPatchFunction

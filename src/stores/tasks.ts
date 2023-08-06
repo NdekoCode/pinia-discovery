@@ -1,10 +1,11 @@
+import { randomId } from '@/libs/utilities/helpers'
 import { defineStore } from 'pinia'
-import { v4 as uuid } from 'uuid'
 import { type Task, type Tasks, type TodoTask } from '../libs/utilities/types'
 const useTaskStore = defineStore('tasks', {
   state: (): Tasks => ({
     tasks: [],
-    currenttasksItem: [],
+    currentTasksItem: [],
+    selectedTask: null,
     pageSize: 5,
     currentPage: 1
   }),
@@ -14,12 +15,25 @@ const useTaskStore = defineStore('tasks', {
     totalPages: (state) => Math.ceil(state.tasks.length / state.pageSize)
   },
   actions: {
+    selectedCurrentTask(task: Task) {
+      this.selectedTask = task
+    },
     addTask(task: Task) {
-      this.tasks.unshift({ ...task, id: uuid(), completed: false })
+      this.tasks.unshift({ ...task, id: randomId(), completed: false })
       this.currentPageItem()
     },
+    editSelectedTask(task: Task) {
+      const taskIndex = this.tasks.findIndex((t) => t.id === task.id)
+      if (taskIndex > -1) {
+        this.tasks[taskIndex] = task
+        this.selectedTask = null
+        this.currentPageItem()
+      }
+    },
     deleteTask(task: Task) {
-      const taskIndex = this.tasks.findIndex((t) => task.id === t.id)
+      const taskIndex = this.tasks.findIndex((t) => {
+        return task.id === t.id
+      })
       if (taskIndex > -1) {
         this.tasks.splice(taskIndex, 1)
         this.currentPageItem()
@@ -29,7 +43,7 @@ const useTaskStore = defineStore('tasks', {
       const response = await fetch('/data/todos.json')
       let taskData = await response.json()
       taskData = taskData.map((p: TodoTask) => ({
-        id: uuid(),
+        id: randomId(),
         title: p.todo,
         completed: p.completed,
         description: p.todo
@@ -39,7 +53,7 @@ const useTaskStore = defineStore('tasks', {
     currentPageItem() {
       const start = (this.currentPage - 1) * this.pageSize
       const end = start + this.pageSize
-      this.currenttasksItem = this.tasks.slice(start, end)
+      this.currentTasksItem = this.tasks.slice(start, end)
     },
     incrementCurrentPage() {
       if (this.currentPage < this.totalPages) {
