@@ -37,7 +37,9 @@ taskStore.$subscribe((mutation: SubscriptionCallbackMutation<Tasks>) => {
 </script>
 <template>
   <form class="flex flex-col justify-center px-16" @submit.prevent="addTask">
-    <h1 class="mb-10 text-3xl font-semibold">Task</h1>
+    <h1 class="mb-10 text-3xl font-semibold">
+      {{ taskStore.title + ' une tache' }}
+    </h1>
     <div class="mb-6">
       <input
         name="title"
@@ -57,9 +59,15 @@ taskStore.$subscribe((mutation: SubscriptionCallbackMutation<Tasks>) => {
     </div>
     <div class="mb-6">
       <button class="px-6 py-3 mr-2 font-semibold text-blue-600 bg-blue-100 rounded" type="submit">
-        Créer
+        {{ taskStore.title }}
       </button>
-      <button class="px-6 py-3 font-semibold text-red-600 bg-red-100 rounded">Annuler</button>
+      <button
+        v-if="taskStore.selectedTask"
+        class="px-6 py-3 font-semibold text-red-600 bg-red-100 rounded"
+        @click="() => (taskStore.selectedTask = null)"
+      >
+        Annuler
+      </button>
     </div>
   </form>
 </template>

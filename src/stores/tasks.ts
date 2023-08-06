@@ -10,6 +10,7 @@ const useTaskStore = defineStore('tasks', {
     currentPage: 1
   }),
   getters: {
+    title: (state) => (state.selectedTask ? 'Modifier' : 'Ajouter'),
     completedTasks: (state) => state.tasks.filter((task) => task.completed),
     unCompletedTasks: (state) => state.tasks.filter((task) => !task.completed),
     totalPages: (state) => Math.ceil(state.tasks.length / state.pageSize)
