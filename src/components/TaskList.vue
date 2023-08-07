@@ -17,9 +17,32 @@ const handleEdit = (task: Task) => {
 <template>
   <div class="py-6">
     <h1 class="mt-10 mb-4 text-4xl">Taches</h1>
+    <div class="my-3 join">
+      <button
+        class="join-item btn"
+        :class="taskStore.filter === 'all' && 'active'"
+        @click="taskStore.filter = 'all'"
+      >
+        Toutes
+      </button>
+      <button
+        class="join-item btn btn-active"
+        :class="taskStore.filter === 'finished' && 'active'"
+        @click="taskStore.filter = 'finished'"
+      >
+        Terminer
+      </button>
+      <button
+        class="join-item btn"
+        :class="taskStore.filter === 'unfinished' && 'active'"
+        @click="taskStore.filter = 'unfinished'"
+      >
+        En attente
+      </button>
+    </div>
     <div>
       <transition-group name="todo" tag="ul">
-        <li v-for="task of taskStore.currentTasksItem" :key="task.id">
+        <li v-for="task of taskStore.filterTodo" :key="task.id">
           <div
             class="flex px-4 py-4 mb-4 bg-white rounded-lg"
             v-if="task.id !== taskStore.selectedTask?.id"
@@ -100,5 +123,9 @@ const handleEdit = (task: Task) => {
   transition:
     opacity 0.35s,
     transform 0.35s;
+}
+.active {
+  background-color: #333;
+  color: #fff;
 }
 </style>

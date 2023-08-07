@@ -10,6 +10,12 @@ const task = reactive({
   description: ''
 })
 const selectedTask: Ref<Task | null> = ref(null)
+const cancel = () => {
+  selectedTask.value = null
+  task.title = ''
+  task.description = ''
+  taskStore.selectedTask = null
+}
 const addTask = (event: Event) => {
   if (selectedTask.value) {
     const dataEdit = { ...selectedTask.value, title: task.title, description: task.description }
@@ -64,7 +70,7 @@ taskStore.$subscribe((mutation: SubscriptionCallbackMutation<Tasks>) => {
       <button
         v-if="taskStore.selectedTask"
         class="px-6 py-3 font-semibold text-red-600 bg-red-100 rounded"
-        @click="() => (taskStore.selectedTask = null)"
+        @click="cancel"
       >
         Annuler
       </button>

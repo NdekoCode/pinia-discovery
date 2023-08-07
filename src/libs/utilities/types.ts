@@ -21,7 +21,9 @@ export type Product = {
 }
 export type Tasks = {
   tasks: Task[]
+  filteredTasks: Task[]
   currentTasksItem: Task[]
+  filter: filterTodo
   selectedTask: Task | null
   pageSize: number
   currentPage: number
@@ -44,3 +46,4 @@ export declare type SubscriptionCallbackMutation<S> =
   | SubscriptionCallbackMutationDirect
   | SubscriptionCallbackMutationPatchObject<S>
   | SubscriptionCallbackMutationPatchFunction
+export type filterTodo = 'all' | 'finished' | 'unfinished'
